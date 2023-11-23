@@ -16,20 +16,20 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
  * ExtentTest  --> This class is used to generate logs for the test cases
  */
 public class Reports {
-	public static ExtentSparkReporter sparkreports;
-	public static ExtentReports extentreports;
-	public static ExtentTest extenttest;
+	public static ExtentSparkReporter sparkReports;
+	public static ExtentReports extentReports;
+	public static ExtentTest extentTest;
 
 	@BeforeSuite(alwaysRun = true)
 	public void startreport() {
 		try {
-			sparkreports=new ExtentSparkReporter(System.getProperty("user.dir")+"/webAutomationReport.html");
-			sparkreports.config().setReportName("W3 schools webAutomation Report");
-			sparkreports.config().setDocumentTitle("Web Automation");
-			sparkreports.config().setTheme(Theme.DARK);
+			sparkReports=new ExtentSparkReporter(System.getProperty("user.dir")+"/webAutomationReport.html");
+			sparkReports.config().setReportName("W3 schools webAutomation Report");
+			sparkReports.config().setDocumentTitle("Web Automation");
+			sparkReports.config().setTheme(Theme.DARK);
 
-			extentreports  = new ExtentReports();
-			extentreports.attachReporter(sparkreports);
+			extentReports  = new ExtentReports();
+			extentReports.attachReporter(sparkReports);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class Reports {
 	}
 	public void setTCDesc(String testcasename) {
 		try {
-			extenttest=extentreports.createTest(testcasename);
+			extentTest=extentReports.createTest(testcasename);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -45,17 +45,17 @@ public class Reports {
 	}
 	public static void reportstep(String status,String desc) {
 		if(status.toUpperCase().equals("PASS")) {
-			extenttest.log(Status.PASS, desc);
+			extentTest.log(Status.PASS, desc);
 		}
 		else if (status.toUpperCase().equals("FAIL")) {
-			extenttest.log(Status.FAIL, desc);
+			extentTest.log(Status.FAIL, desc);
 		}
 		else if(status.toUpperCase().equals("INFO")) {
-			extenttest.log(Status.INFO,desc);
+			extentTest.log(Status.INFO,desc);
 		}
 	}
 	@AfterSuite(alwaysRun = true)
 	public void endreport() {
-		extentreports.flush();
+		extentReports.flush();
 	}
 }

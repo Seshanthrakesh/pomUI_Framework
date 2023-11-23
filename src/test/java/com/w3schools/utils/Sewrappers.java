@@ -641,6 +641,7 @@ public class Sewrappers {
 		}
 		catch(Exception ex)
 		{
+			Reports.reportstep("FAIL","Verifying Enabled "+ele+" is Failed");		
 			ex.printStackTrace();
 		}
 		return retVal;
@@ -654,9 +655,11 @@ public class Sewrappers {
 			File src=( (TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			File dest= new File(System.getProperty("user.dir")+"/screenshots/"+screenshotName+".png");
 			FileUtils.copyFile(src, dest);
+			Reports.reportstep("PASS","Screenshot has taken Successfully");
 		}
 		catch(Exception ex)
 		{
+			Reports.reportstep("FAIL","Taking Screenshoot has Failed");
 			ex.printStackTrace();
 		}
 
