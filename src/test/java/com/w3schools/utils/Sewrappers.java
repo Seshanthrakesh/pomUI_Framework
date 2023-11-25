@@ -11,6 +11,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -28,7 +29,7 @@ public class Sewrappers {
 
 
 	//method to launch the chrome browser with the given url
-	public void launchBrowser(String url)
+	public void launchChromeBrowser(String url)
 	{
 		try
 		{
@@ -49,6 +50,22 @@ public class Sewrappers {
 		}
 	}
 
+	public void launchFirefoxBrowser(String url) {
+		try {
+			driver=new FirefoxDriver();
+			driver.get(url);
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+			//to capture logs in the report
+			Reports.reportstep("PASS","Firefox browser launched successfully");
+		} catch (Exception e) {
+			Reports.reportstep("FAIL","Problem while launching the browser");
+			e.printStackTrace();
+		}
+
+
+	}
 	//method to close the current browser window
 	public void closeCurrentBrowser()
 	{
@@ -387,7 +404,7 @@ public class Sewrappers {
 		try
 		{
 			JavascriptExecutor js = (JavascriptExecutor)driver;
-			
+
 			//To ScrollDown
 			js.executeScript("window.scrollBy(0,"+scrolldownValue+");");
 			Reports.reportstep("PASS","Scroll vertical is Successfull");

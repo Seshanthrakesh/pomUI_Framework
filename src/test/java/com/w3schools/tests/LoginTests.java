@@ -15,7 +15,7 @@ public class LoginTests extends Sewrappers{
 		try
 		{
 			report.setTCDesc("Validating login in W3 schools with valid credentials");
-			launchBrowser("https://profile.w3schools.com/");
+			launchFirefoxBrowser("https://profile.w3schools.com/");
 			w3.loginW3Schools("seshanthrakesh1901@gmail.com","Seshanth@9852");
 
 			//validation for checking the title
