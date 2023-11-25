@@ -1,4 +1,6 @@
 package com.w3schools.tests;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,12 +20,16 @@ public class LoginTests extends Sewrappers{
 			launchFirefoxBrowser("https://profile.w3schools.com/");
 			w3.loginW3Schools("seshanthrakesh1901@gmail.com","Seshanth@9852");
 
+			WebElement mylearning=driver.findElement(By.xpath("//div[text()='My learning']"));
+			waitForElement(mylearning,20);
 			//validation for checking the title
-			//Assert.assertTrue(driver.getTitle().equals("My learning |  W3Schools"));
+			System.out.println(driver.getTitle());
+			System.out.println(driver.getTitle().equals("My learning | W3Schools"));
+			Assert.assertTrue(driver.getTitle().equals("My learning | W3Schools"));
 			
 			//System.out.println("Assertion Passed");
 			Reports.reportstep("INFO", "Assertion passed by title");
-			
+
 		}
 		catch(Exception ex)
 		{
